@@ -1,6 +1,10 @@
 #' Get a big list of all the instruments.
 #'
 #' @export
+#' @examples
+#'
+#' robin_inst <- rh_instruments()
+#'
 rh_instruments <- function(){
 
   # Create the url

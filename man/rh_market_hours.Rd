@@ -12,4 +12,9 @@ rh_market_hours(mic, date = Sys.Date())
 \description{
 Get the market info for a specific market.
 }
+\examples{
+
+robin_mkt_hours <- rh_market_hours(mic = "BATS")
+
+}
 

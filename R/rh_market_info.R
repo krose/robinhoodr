@@ -3,6 +3,10 @@
 #'
 #' @param mic Market identifier code.
 #' @export
+#'
+#' @examples
+#'
+#' robin_mkt_info <- rh_market_info(mic = "BATS")
 rh_market_info <- function(mic){
 
   # Create the url

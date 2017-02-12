@@ -12,4 +12,8 @@ rh_market_info(mic)
 \description{
 Get the market info for a specific market.
 }
+\examples{
+
+robin_mkt_info <- rh_market_info(mic = "BATS")
+}
 

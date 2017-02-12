@@ -9,4 +9,9 @@ rh_instruments()
 \description{
 Get a big list of all the instruments.
 }
+\examples{
+
+robin_inst <- rh_instruments()
+
+}
 
