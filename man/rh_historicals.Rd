@@ -5,12 +5,12 @@
 \title{Get the historical quotes for a symbol.}
 \usage{
 rh_historicals(symbols, interval = "day", span = "year",
-  bounds = "regular", keep_meta = FALSE)
+  bounds = "regular", keep_meta = FALSE, to_xts = FALSE)
 }
 \arguments{
 \item{interval}{The interval: week|day|10minute|5minute|null(all)}
 
-\item{span}{day|week|year|5year|all}
+\item{span}{The span: day|week|year|5year|all}
 
 \item{bounds}{extended|regular|trading}
 
@@ -27,7 +27,10 @@ symbol <- c("MSFT")
 
 rh_historicals(symbol = symbol) # Get the last years closing prices.
 rh_historicals(symbol = symbol, interval = "5minute", span = "day", bounds = "trading")
-rh_historicals(symbol = symbol, interval = "5minute", span = "day", bounds = "extended")
-rh_historicals(symbol = symbol, interval = "5minute", span = "day", bounds = "regular")
+rh_historicals(symbol = symbol, interval = "5minute", span = "week", bounds = "regular")
+rh_historicals(symbol = symbol, interval = "10minute", span = "day", bounds = "regular")
+rh_historicals(symbol = symbol, span = "year", to_xts = TRUE)
+rh_historicals(symbol = symbol, span = "all", to_xts = TRUE)
+rh_historicals(symbol = symbol, to_xts = TRUE)
 }
 

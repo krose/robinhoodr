@@ -1,8 +1,8 @@
 #' Get the historical quotes for a symbol.
 #'
 #' @param symbol The shorthand symbols.
-#' @param interval The interval: week|day|10minute|5minute|null(all)
-#' @param span day|week|year|5year|all
+#' @param interval The interval: week|day|10minute|5minute
+#' @param span The span: day|week|year
 #' @param bounds extended|regular|trading
 #' @export
 #' @examples
@@ -13,9 +13,14 @@
 #'
 #' rh_historicals(symbol = symbol) # Get the last years closing prices.
 #' rh_historicals(symbol = symbol, interval = "5minute", span = "day", bounds = "trading")
-#' rh_historicals(symbol = symbol, interval = "5minute", span = "day", bounds = "extended")
-#' rh_historicals(symbol = symbol, interval = "5minute", span = "day", bounds = "regular")
-rh_historicals <- function(symbols, interval = "day", span = "year", bounds = "regular", keep_meta = FALSE){
+#' rh_historicals(symbol = symbol, interval = "5minute", span = "week", bounds = "regular")
+#' rh_historicals(symbol = symbol, interval = "10minute", span = "day", bounds = "regular")
+#' rh_historicals(symbol = symbol, span = "year", to_xts = TRUE)
+#' rh_historicals(symbol = symbol, span = "", to_xts = TRUE)
+#' rh_historicals(symbol = symbol, to_xts = TRUE)
+rh_historicals <- function(symbols, interval = "day",
+                           span = "year", bounds = "regular",
+                           keep_meta = FALSE, to_xts = FALSE){
 
   # Get the data
   hist_list <- lapply(X = symbols,
@@ -26,7 +31,20 @@ rh_historicals <- function(symbols, interval = "day", span = "year", bounds = "r
 
   # Keep only the historical data
   if(!keep_meta){
-    hist_list <- lapply(hist_list, function(x)x$historicals)
+    hist_list <- lapply(hist_list, function(x) x$historicals[[1]])
+  }
+
+  if(to_xts & !keep_meta){
+
+    hist_list <- lapply(hist_list,
+                        function(x){
+                          x_converted <- xts::xts(x = x[, c("open_price", "close_price", "high_price", "low_price", "volume")],
+                                                  order.by = x$begins_at)
+                          attr(x_converted, "session") <- x$session
+                          attr(x_converted, "interpolated") <- x$interpolated
+
+                          x_converted
+                        })
   }
 
   # name the list.
@@ -49,8 +67,12 @@ rh_historicals_one <- function(symbol, interval = interval, span = span, bounds 
   # GET the quotes
   quotes_rh <- httr::GET(url = rh_url)
 
-  # Check the response
-  httr::stop_for_status(quotes_rh)
+  # Check the responce
+  if (httr::http_error(quotes_rh)) {
+    stop(
+      httr::content(x = quotes_rh, as = "text", encoding = "UTF-8"),
+      call. = FALSE)
+  }
 
   # parse the content
   content_rh <- httr::content(x = quotes_rh, as = "text", encoding = "UTF-8")
