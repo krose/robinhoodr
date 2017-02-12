@@ -6,7 +6,7 @@
 #' @export
 #' @examples
 #'
-#' library(robinhood)
+#' library(robinhoodr)
 #'
 #' rh_instruments_info(symbols = c("MSFT", "FB", "GOOG"))
 #'

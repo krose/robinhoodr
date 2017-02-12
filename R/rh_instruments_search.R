@@ -7,7 +7,7 @@
 #' @export
 #' @examples
 #'
-#' library(robinhood)
+#' library(robinhoodr)
 #'
 #' rh_instrument_search(keyword = "oil")
 rh_instruments_search <- function(keyword){

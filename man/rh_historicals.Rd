@@ -21,7 +21,7 @@ Get the historical quotes for a symbol.
 }
 \examples{
 
-library(robinhood)
+library(robinhoodr)
 
 symbol <- c("MSFT")
 

@@ -14,7 +14,7 @@ Function to get the fundamentals for the symbols.
 }
 \examples{
 
-library(robinhood)
+library(robinhoodr)
 
 rh_instruments_info(symbols = c("MSFT", "FB", "GOOG"))
 

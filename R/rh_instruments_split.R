@@ -5,7 +5,7 @@
 #' @export
 #' @examples
 #'
-#' library(robinhood)
+#' library(robinhoodr)
 #'
 #' rh_instruments_split(c("MSFT", "JDST", "FB"))
 rh_instruments_split <- function(symbols){

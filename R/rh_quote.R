@@ -4,7 +4,7 @@
 #' @export
 #' @examples
 #'
-#' library(robinhood)
+#' library(robinhoodr)
 #'
 #' symbols <- c("MSFT", "FB", "TSLA")
 #'

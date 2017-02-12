@@ -14,7 +14,7 @@ Get a quote for one or more symbols.
 }
 \examples{
 
-library(robinhood)
+library(robinhoodr)
 
 symbols <- c("MSFT", "FB", "TSLA")
 

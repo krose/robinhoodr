@@ -7,7 +7,7 @@
 #' @export
 #' @examples
 #'
-#' library(robinhood)
+#' library(robinhoodr)
 #'
 #' symbol <- c("MSFT")
 #'

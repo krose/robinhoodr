@@ -1,4 +1,4 @@
-Package: robinhood
+Package: robinhoodr
 Type: Package
 Title: An R Wrapper for the Robinhood API.
 Version: 0.1.0

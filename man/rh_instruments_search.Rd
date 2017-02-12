@@ -15,7 +15,7 @@ that fx might be found in the name.
 }
 \examples{
 
-library(robinhood)
+library(robinhoodr)
 
 rh_instrument_search(keyword = "oil")
 }

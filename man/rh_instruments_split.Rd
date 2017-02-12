@@ -14,7 +14,7 @@ Function to get the split info on a symbol.
 }
 \examples{
 
-library(robinhood)
+library(robinhoodr)
 
 rh_instruments_split(c("MSFT", "JDST", "FB"))
 }
