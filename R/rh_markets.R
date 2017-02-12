@@ -3,6 +3,9 @@
 #' Returns a data.frame with all the available markets.
 #'
 #' @export
+#' @examples
+#'
+#' rh_markets()
 rh_markets <- function(){
 
   # Create the url

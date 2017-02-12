@@ -9,4 +9,8 @@ rh_markets()
 \description{
 Returns a data.frame with all the available markets.
 }
+\examples{
+
+rh_markets()
+}
 
