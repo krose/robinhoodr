@@ -84,7 +84,8 @@ You can't get more than a years worth of historical data. I don't know if [Robin
 hd_daily <- rh_historicals(symbols = symbols, 
                            interval = "day", 
                            span = "year", 
-                           bounds = "regular")
+                           bounds = "regular", 
+                           to_xts = FALSE)
 
 str(hd_daily)
 
@@ -97,7 +98,7 @@ You can decide to keep the meta data from the API request but only if the nested
 hd_daily <- rh_historicals(symbols = symbols, 
                            interval = "day", 
                            span = "year", 
-                           bounds = "regular", keep_meta = TRUE)
+                           bounds = "regular", keep_meta = TRUE, to_xts = FALSE)
 
 str(hd_daily)
 
