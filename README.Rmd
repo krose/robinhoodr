@@ -20,6 +20,11 @@ This package is made based on the [unofficial documentation](https://github.com/
 
 I have only implemented the parts of the API where authentication isn't needed, since I can't open an account. Please feel free to add the missing functionality.
 
+### Issues
+
+- The time zones are still a bit of a mystery to me, which is why I've just used UTC for now.
+- All the requests that require authentication are not implemnted.
+
 ### Current functionality
 
 - Get the last quote: (`rh_quote`)
@@ -30,6 +35,117 @@ I have only implemented the parts of the API where authentication isn't needed, 
 - Instruments fundamentals: (`rh_instruments_info`)
 - Instruments splits: (`rh_instruments_split`)
 - instruments keyword search: (`rh_instruments_search`)
+
+### A few examples
+
+Let's see how it works. Load the package and set the symbols.
+
+```{r getready, message=FALSE}
+
+library(robinhoodr)
+library(quantmod)
+
+symbols <- c("MSFT", "FB")
+
+```
+
+#### Historical data
+
+
+Let's get some intraday data. The query below returns a list of length two with xts objects.
+
+The function will make a request to the API for each individual symbol, soo if there are many symbols it can take a while.
+
+```{r intrahist}
+
+hd <- rh_historicals(symbols = symbols, 
+                     interval = "5minute", 
+                     span = "day", 
+                     bounds = "regular", 
+                     keep_meta = FALSE, 
+                     to_xts = TRUE)
+
+str(hd)
+
+```
+
+Use quantmod to plot the Microsoft data.
+
+```{r printmsft}
+
+print(chart_Series(x = hd[["MSFT"]]))
+
+```
+
+You can't get more than a years worth of historical data. I don't know if [Robinhood](https://support.robinhood.com/hc/en-us/articles/210216823-Robinhood-API-Integrations) might change that. In the example below a list with data frames are returned.
+
+```{r dailydata}
+
+hd_daily <- rh_historicals(symbols = symbols, 
+                           interval = "day", 
+                           span = "year", 
+                           bounds = "regular")
+
+str(hd_daily)
+
+```
+
+You can decide to keep the meta data from the API request but only if the nested historical data is a data.frame.
+
+```{r dailydatawithmeta}
+
+hd_daily <- rh_historicals(symbols = symbols, 
+                           interval = "day", 
+                           span = "year", 
+                           bounds = "regular", keep_meta = TRUE)
+
+str(hd_daily)
+
+```
+
+### Quotes
+
+Get the latest quote.
+
+```{r getquote}
+
+str(rh_quote(symbols = symbols))
+
+```
+
+
+#### Markets
+
+Get info on the markets. The last time I looked it up there were about 14 exchanges, so this must be the exchanges Robinhood use to execute the transactions. 
+
+```{r markets}
+
+# List markets
+str(rh_markets())
+
+# Get specific market info
+str(rh_market_info("BATS"))
+
+# Get the market hours.
+str(rh_market_hours("BATS"))
+
+```
+
+### Instruments
+
+Use rh_instruments to get a data.frame of all the available symbols. The API results are paginated, so it will a minute to download. You can also search and get fundamentals for a stock.
+
+```{r instruments}
+## Get a data.frame of all the instruments.
+str(rh_instruments())
+
+# Seach for a specific keyword
+str(rh_instruments_search(keyword = "oil"))
+
+# Get fundamentals for a symbol
+str(rh_instruments_info(symbols = symbols))
+
+```
 
 ### Related Projects
 
