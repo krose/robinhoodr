@@ -8,9 +8,9 @@ rh_historicals(symbols, interval = "day", span = "year",
   bounds = "regular", keep_meta = FALSE, to_xts = FALSE)
 }
 \arguments{
-\item{interval}{The interval: week|day|10minute|5minute|null(all)}
+\item{interval}{The interval: week|day|10minute|5minute}
 
-\item{span}{The span: day|week|year|5year|all}
+\item{span}{The span: day|week|year}
 
 \item{bounds}{extended|regular|trading}
 
@@ -30,7 +30,7 @@ rh_historicals(symbol = symbol, interval = "5minute", span = "day", bounds = "tr
 rh_historicals(symbol = symbol, interval = "5minute", span = "week", bounds = "regular")
 rh_historicals(symbol = symbol, interval = "10minute", span = "day", bounds = "regular")
 rh_historicals(symbol = symbol, span = "year", to_xts = TRUE)
-rh_historicals(symbol = symbol, span = "all", to_xts = TRUE)
+rh_historicals(symbol = symbol, span = "", to_xts = TRUE)
 rh_historicals(symbol = symbol, to_xts = TRUE)
 }
 
