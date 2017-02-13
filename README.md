@@ -92,7 +92,8 @@ You can't get more than a years worth of historical data. I don't know if [Robin
 hd_daily <- rh_historicals(symbols = symbols, 
                            interval = "day", 
                            span = "year", 
-                           bounds = "regular")
+                           bounds = "regular", 
+                           to_xts = FALSE)
 
 str(hd_daily)
 #> List of 2
@@ -123,12 +124,12 @@ You can decide to keep the meta data from the API request but only if the nested
 hd_daily <- rh_historicals(symbols = symbols, 
                            interval = "day", 
                            span = "year", 
-                           bounds = "regular", keep_meta = TRUE)
+                           bounds = "regular", keep_meta = TRUE, to_xts = FALSE)
 
 str(hd_daily)
 #> List of 2
 #>  $ MSFT:'data.frame':    1 obs. of  7 variables:
-#>   ..$ quote      : chr "https://api.robinhood.com/quotes/50810c35-d215-4866-9758-0ada4ac79ffa/"
+#>   ..$ quote      : chr "https://api.robinhood.com/quotes/MSFT/"
 #>   ..$ symbol     : chr "MSFT"
 #>   ..$ interval   : chr "day"
 #>   ..$ span       : chr "year"
@@ -171,19 +172,19 @@ Get the latest quote.
 
 str(rh_quote(symbols = symbols))
 #> 'data.frame':    2 obs. of  14 variables:
-#>  $ ask_price                      : chr  "64.2400" "134.3900"
-#>  $ ask_size                       : int  20100 300
-#>  $ bid_price                      : chr  "64.1000" "134.1500"
-#>  $ bid_size                       : int  100 3000
+#>  $ ask_price                      : chr  "64.2000" "134.4700"
+#>  $ ask_size                       : int  10100 800
+#>  $ bid_price                      : chr  "64.1100" "134.4000"
+#>  $ bid_size                       : int  100 200
 #>  $ last_trade_price               : chr  "64.0000" "134.1900"
-#>  $ last_extended_hours_trade_price: chr  "64.0000" "134.3900"
+#>  $ last_extended_hours_trade_price: chr  "64.1800" "134.4500"
 #>  $ previous_close                 : chr  "64.0600" "134.1400"
 #>  $ adjusted_previous_close        : chr  "64.0600" "134.1400"
 #>  $ previous_close_date            : POSIXct, format: "2017-02-09" "2017-02-09"
 #>  $ symbol                         : chr  "MSFT" "FB"
 #>  $ trading_halted                 : logi  FALSE FALSE
 #>  $ last_trade_price_source        : chr  "consolidated" "consolidated"
-#>  $ updated_at                     : POSIXct, format: "2017-02-13 12:03:45" "2017-02-13 12:11:15"
+#>  $ updated_at                     : POSIXct, format: "2017-02-13 12:39:50" "2017-02-13 12:52:36"
 #>  $ instrument                     : chr  "https://api.robinhood.com/instruments/50810c35-d215-4866-9758-0ada4ac79ffa/" "https://api.robinhood.com/instruments/ebab2398-028d-4939-9f1d-13bf38f81c50/"
 ```
 
